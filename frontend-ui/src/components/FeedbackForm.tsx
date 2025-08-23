@@ -122,43 +122,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSubmit }) => {
           )}
         </div>
 
-        {/* Category and Severity */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-2">
-              Category
-            </label>
-            <select
-              id="category"
-              value={formData.category}
-              onChange={(e) => setFormData({ ...formData, category: e.target.value as any })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="bug">🐛 Bug Report</option>
-              <option value="feature">✨ Feature Request</option>
-              <option value="improvement">⚡ Improvement</option>
-              <option value="complaint">😤 Complaint</option>
-              <option value="praise">👏 Praise</option>
-            </select>
-          </div>
-          
-          <div>
-            <label htmlFor="severity" className="block text-sm font-medium text-gray-700 mb-2">
-              Severity
-            </label>
-            <select
-              id="severity"
-              value={formData.severity}
-              onChange={(e) => setFormData({ ...formData, severity: e.target.value as any })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="low">🟢 Low</option>
-              <option value="medium">🟡 Medium</option>
-              <option value="high">🟠 High</option>
-              <option value="critical">🔴 Critical</option>
-            </select>
-          </div>
-        </div>
+       
 
         {/* Description */}
         <div>
