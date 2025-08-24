@@ -1,3 +1,4 @@
+import datetime
 import os
 from pathlib import Path
 import json
@@ -94,7 +95,9 @@ class InsertFeedback(Tool[str]):
             "title": title,
             "description": description,
             "embedding": embedding_vector,
-            "upvotes":1,
+            "upvotes": 1,
+            "created_at": datetime.datetime.now(datetime.UTC),
+            "updated_at": datetime.datetime.now(datetime.UTC)
         }
 
         coll.insert_one(feedback)

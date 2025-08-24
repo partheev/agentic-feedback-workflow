@@ -3,6 +3,7 @@
 # Run commonds on os
 import os
 
+
 def run_setup():
     # Build resend mcp server
     # Check if resend mcp server is already built

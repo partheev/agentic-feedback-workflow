@@ -55,6 +55,11 @@ const Feedbacks: React.FC = () => {
                   <h3 className="text-lg font-semibold text-gray-900">{feedback.feedback_title}</h3>
                   <p className="text-sm text-gray-600">{feedback.customer_name}</p>
                   <p className="text-sm text-gray-500">{feedback.customer_email}</p>
+                  {feedback?.created_at && (
+                    <p className="text-xs text-gray-400 mt-1">
+                      {new Date(feedback?.created_at).toLocaleDateString()}
+                    </p>
+                  )}
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-sm text-gray-600">Upvotes:</span>

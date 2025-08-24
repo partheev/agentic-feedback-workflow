@@ -21,9 +21,14 @@ class FeedbackTriage(BaseModel):
     summary: str
     tags: List[str] = []
 
-
 class FeedbackItem(BaseModel):
-    message: str
+    _id: str
+    customer_email: str
+    customer_name: str
+    feedback_title: str
+    feedback_description: str
+    upvotes: int
+    created_at: Optional[datetime] = None
 
 
 # ----- Portia structured output schema -----
