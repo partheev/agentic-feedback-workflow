@@ -68,12 +68,27 @@ This reduces human effort, surfaces emerging issues quickly, and ensures consist
 ---
 
 # Screenshots
+
+## For valid bug submission
 <img width="1154" height="859" alt="Screenshot 2025-08-24 at 10 06 58 AM" src="https://github.com/user-attachments/assets/fe1e395f-3785-43e9-93be-a25a284fcf8c" />
 <img width="1158" height="616" alt="Screenshot 2025-08-24 at 10 04 27 AM" src="https://github.com/user-attachments/assets/003436a3-6046-4143-9c53-0c28416b7ba4" />
 <img width="1509" height="857" alt="Screenshot 2025-08-24 at 10 07 52 AM" src="https://github.com/user-attachments/assets/97d16b27-d32b-42df-a4a9-5daaaf9c94b3" />
 <img width="1512" height="909" alt="Screenshot 2025-08-24 at 10 08 31 AM" src="https://github.com/user-attachments/assets/ab449e08-8a44-40c2-9946-1c2bca31278b" />
 
 <img width="1079" height="594" alt="Screenshot 2025-08-24 at 10 08 51 AM" src="https://github.com/user-attachments/assets/6e532533-857b-4835-bd8b-7153f00e9b8c" />
+
+## For invalid bug summission
+<img width="1142" height="847" alt="Screenshot 2025-08-24 at 3 01 28 PM" src="https://github.com/user-attachments/assets/ec95927a-3752-4c82-8292-0df2a51c400d" />
+<img width="1186" height="385" alt="Screenshot 2025-08-24 at 3 30 52 PM" src="https://github.com/user-attachments/assets/6baa22a1-c602-4383-9f4c-98004f8bf8a5" />
+
+## Feedback submission
+<img width="1066" height="852" alt="Screenshot 2025-08-24 at 3 37 50 PM" src="https://github.com/user-attachments/assets/63257a75-9399-4a01-a632-a8fcde0f9799" />
+
+#### Semantically simiar feedback
+<img width="1076" height="850" alt="Screenshot 2025-08-24 at 3 37 27 PM" src="https://github.com/user-attachments/assets/0efe0051-4243-4880-9d7f-6c2435d7e506" />
+
+#### Saved feedback document with upvotes 2
+<img width="1075" height="196" alt="Screenshot 2025-08-24 at 3 47 38 PM" src="https://github.com/user-attachments/assets/70dcf0aa-cb15-4c8e-a45a-8b7e24474624" />
 
 
 ## Setup & Run Backend/Agent
