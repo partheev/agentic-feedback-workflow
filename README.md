@@ -3,6 +3,10 @@
 **Streamlining feedback handling** using Portia AI, MCP-powered services, MongoDB, and GitHub—built for small team, startups and lazy PMs...haha!
 
 ---
+#### Frontend Deployment link: https://ai-feedback.netlify.app/ (live)
+#### Backend deployement link: https://agentic-feedback-workflow.onrender.com 
+- Note: Backend will be down if there's no activity. And server will take time to respond in these scenarios
+---
 
 ##  Table of Contents
 
