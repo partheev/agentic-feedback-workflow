@@ -121,6 +121,7 @@ sh ./build-script.sh
 # - GITHUB_REPO
 # - RESEND_API_KEY
 # - SENDER_EMAIL_ADDRESS
+# - RECEIVER_EMAIL_ADDRESS ( we need to remove this field from env and code once we upgrade email service to premium, right now it only sends mails to verified emails )
 
 
 # Run the FastAPI backend/agent
