@@ -31,9 +31,9 @@ Bug reports and user feedback often arrive incomplete, duplicated, or without pr
 
 - Classify feedback report as **bug report or product feedback**.
 - Validate bug quality and revert back to user if bug report is incomplete.
-- Perform semantic duplicate feedbacks detection using MongoDB Atlas Vector Search.
 - Automatically fetch potential fixes from the web (via Tavily).
 - File GitHub issues for valid bugs with proper bug description, possible fixes and steps to reproduce.
+- Perform semantic duplicate feedbacks detection using MongoDB Atlas Vector Search.
 - Store, upvote, and manage feedback with MongoDB.
 
 This reduces human effort, surfaces emerging issues quickly, and ensures consistent quality triage.
