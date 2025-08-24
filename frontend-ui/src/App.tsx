@@ -1,40 +1,16 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import FeedbackForm from './components/FeedbackForm';
-import JudgeReview from './components/Feedbacks';
-import { FeedbackData } from './types';
-import { mockFeedbacks } from './data/mockData';
 import Feedbacks from './components/Feedbacks';
-
+import { ToastContainer } from 'react-toastify';
 function App() {
   const [currentPage, setCurrentPage] = useState<'form' | 'review'>('form');
-  const [feedbacks, setFeedbacks] = useState<FeedbackData[]>(mockFeedbacks);
 
-  const addFeedback = (feedback: Omit<FeedbackData, 'id' | 'submittedAt' | 'status' | 'aiAnalysis'>) => {
-    const newFeedback: FeedbackData = {
-      ...feedback,
-      id: Date.now().toString(),
-      submittedAt: new Date().toISOString(),
-      status: 'new',
-      aiAnalysis: {
-        sentiment: Math.random() > 0.5 ? 'positive' : 'negative',
-        priority: Math.floor(Math.random() * 5) + 1,
-        category: feedback.category,
-        tags: ['user-feedback', 'auto-tagged'],
-        similarIssues: Math.floor(Math.random() * 3),
-        confidenceScore: Math.random() * 0.3 + 0.7
-      }
-    };
-    setFeedbacks(prev => [newFeedback, ...prev]);
-  };
+ 
 
-  const updateFeedbackStatus = (id: string, status: string) => {
-    setFeedbacks(prev => 
-      prev.map(f => f.id === id ? { ...f, status } : f)
-    );
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <ToastContainer />
       {/* Navigation Header */}
       <header className="bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -67,7 +43,7 @@ function App() {
                     : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                 }`}
               >
-                Feedbacks ({feedbacks.length})
+                Feedbacks
               </button>
             </nav>
           </div>
@@ -77,7 +53,7 @@ function App() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {currentPage === 'form' ? (
-          <FeedbackForm onSubmit={addFeedback} />
+          <FeedbackForm />
         ) : (
           <Feedbacks
           />

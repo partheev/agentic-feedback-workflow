@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { RefreshCw } from 'lucide-react';
 import { FeedbackData } from '../types';
 import ApiService from '../services/api';
+import { toast } from 'react-toastify';
 
 const Feedbacks: React.FC = () => {
   const [feedbacks, setFeedbacks] = useState<FeedbackData[]>([]);
@@ -14,6 +15,7 @@ const Feedbacks: React.FC = () => {
       setFeedbacks(data);
     } catch (error) {
       console.error('Error fetching feedbacks:', error);
+      toast.error('Unable to fetch feedbacks');
     } finally {
       setLoading(false);
     }

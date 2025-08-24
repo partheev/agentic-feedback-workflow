@@ -9,7 +9,7 @@ class ApiService {
         baseURL: import.meta.env.VITE_API_URL,
     });
 
-    async submitFeedback(feedback: FeedbackData) {
+    async submitFeedback(feedback: Omit<FeedbackData, 'upvotes'>) {
         const response = await this.axiosClient.post("/feedback", feedback);
         return response.data;
     }

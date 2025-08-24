@@ -30,6 +30,15 @@ class FeedbackItem(BaseModel):
     upvotes: int
     created_at: Optional[datetime] = None
 
+class FeedbackPayload(BaseModel):
+    customer_email: str
+    customer_name: str
+    feedback_title: str
+    feedback_description: str
+
+class FeedbackSubmitResponse(BaseModel):
+    message: str
+
 
 # ----- Portia structured output schema -----
 

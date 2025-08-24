@@ -6,7 +6,7 @@ from datetime import datetime
 from uuid import uuid4
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from models import FeedbackIn, FeedbackItem
+from models import FeedbackItem, FeedbackPayload, FeedbackSubmitResponse
 from portia_service.workflows import handle_customer_feedback
 import asyncio
 from mongodb_client import db
@@ -40,8 +40,8 @@ def list_feedback():
         "created_at": item.get("created_at", None)
     } for item in list(db.get_collection("feedback").find({}, {"_id": 1, "email": 1, "name": 1, "title": 1, "description": 1, "upvotes": 1, "created_at": 1, "updated_at": 1}))]
 
-@app.post("/feedback", response_model=FeedbackItem)
-async def submit_feedback(payload: FeedbackIn):
+@app.post("/feedback", response_model=FeedbackSubmitResponse)
+async def submit_feedback(payload: FeedbackPayload):
     
     # Run handle_customer_feedback in background
     loop = asyncio.get_event_loop()

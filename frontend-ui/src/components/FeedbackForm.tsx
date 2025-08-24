@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
-import { FeedbackData } from '../types';
 import api from '../services/api';
 import { toast } from 'react-toastify';
 
-interface FeedbackFormProps {
-  onSubmit: (feedback: FeedbackData) => void;
-}
-
-const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSubmit }) => {
+const FeedbackForm: React.FC = () => {
   const [formData, setFormData] = useState({
     customer_email: '',
     customer_name: '',
@@ -22,11 +17,17 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSubmit }) => {
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
     
-    if (!formData.feedback_title.trim()) {
+    if (!formData.feedback_title.trim() ) {
       newErrors.feedback_title = 'Title is required';
+    }
+    if (formData.feedback_title.length < 5){
+      newErrors.feedback_title = 'Title must be at least 5 characters';
     }
     if (!formData.feedback_description.trim()) {
       newErrors.feedback_description = 'Description is required';
+    }
+    if (formData.feedback_description.length < 5) {
+      newErrors.feedback_description = 'Description must be at least 5 characters';
     }
     if (!formData.customer_name.trim()) {
       newErrors.customer_name = 'Name is required';
@@ -53,17 +54,9 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSubmit }) => {
 
     try {
       await api.submitFeedback(formData);
-      // show toast message "Feedback submitted successfully"
       toast.success('Feedback submitted successfully');
-    } catch (error) {
-      console.error('Error submitting feedback:', error);
-      toast.error('Error submitting feedback');
-    } finally {
-      setIsSubmitting(false);
       setIsSubmitted(true);
-    }
-    
-  
+
       setFormData({
         feedback_title: '',
         feedback_description: '',
@@ -71,6 +64,15 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSubmit }) => {
         customer_email: '',
       });
 
+    } catch (error) {
+      console.error('Error submitting feedback:', error);
+      toast.error('Failed to submit feedback. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
+    
+  
+  
   
   };
 
