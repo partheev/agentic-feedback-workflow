@@ -10,8 +10,8 @@
 2. [AI Agentic Workflow](#ai-agentic-workflow)  
 3. [Features](#features)  
 4. [Tech Stack](#tech-stack)  
-5. [Screenshots](#demo--screenshots)  
-6. [Run Project](#setup--run)  
+5. [Screenshots](#screenshots)  
+6. [Run Project](#run-project)  
 
 ---
 
