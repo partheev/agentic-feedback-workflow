@@ -4,7 +4,8 @@ from portia import (
 )
 from portia.cli import CLIExecutionHooks
 import os
-from .custom_tools.semantic_search import InsertFeedback, SemanticSearchForFeedback
+from .custom_tools.semantic_search import InsertFeedback, SemanticSearchForFeedback, UpvoteFeedback
+
 load_dotenv(override=True)
 
 # Environment variables
@@ -25,6 +26,7 @@ tool_registry = DefaultToolRegistry(config)
 my_tool_registry = ToolRegistry([
     InsertFeedback(),
     SemanticSearchForFeedback(),
+    UpvoteFeedback(),
 ])
 
 tool_registry = tool_registry + my_tool_registry
@@ -36,7 +38,8 @@ tool_registry = tool_registry + McpToolRegistry.from_stdio_connection(
     server_name="mongodb",
     command="npx",
     args=[
-        "mongo-mcp",
+         "-y",
+        "mcp-mongo-server",
         MONGODB_URI
       ]
 )

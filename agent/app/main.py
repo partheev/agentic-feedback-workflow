@@ -1,3 +1,7 @@
+from build import run_setup
+
+run_setup()
+
 from datetime import datetime
 from uuid import uuid4
 from fastapi import FastAPI, HTTPException
@@ -5,6 +9,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from models import FeedbackIn, FeedbackItem
 from portia_service.workflows import handle_customer_feedback
 import asyncio
+
+
 app = FastAPI(title="Portia Feedback Backend", version="0.1.0")
 
 # CORS: allow your local frontend origin(s)

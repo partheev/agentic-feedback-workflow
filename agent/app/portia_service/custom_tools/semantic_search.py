@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field
 from portia.tool import Tool, ToolRunContext
 from openai import OpenAI
 from dotenv import load_dotenv
+from bson.objectid import ObjectId
 
 from pymongo import MongoClient
 
@@ -53,16 +54,20 @@ class SemanticSearchForFeedbackSchema(BaseModel):
         description="The description of the feedback",
     )
 
+class UpvoteFeedbackSchema(BaseModel):
+    """Schema defining the inputs for the UpvoteFeedback."""
+
+    feedback_id: str = Field(...,
+        description="The id of the feedback to upvote",
+    )
+
 class Utils:
     @staticmethod
     def generate_feedback_embedding(title: str, description: str) -> list[float]:
         """Generates an embedding for the feedback"""
         response = openai_client.embeddings.create(
-        model=OPENAI_EMBEDDING_MODEL,
-        input="""
-            {title}\n
-            {description}
-            """
+            model=OPENAI_EMBEDDING_MODEL,
+            input=f"{title}\n{description}"
         )
 
         embedding_vector = response.data[0].embedding
@@ -105,7 +110,7 @@ class SemanticSearchForFeedback(Tool[str]):
     name: str = "Semantic search for feedback"
     description: str = "Performs semantic search for feedback in the mongodb database"
     args_schema: type[BaseModel] = SemanticSearchForFeedbackSchema
-    output_schema: tuple[dict, str] = ("dict", "A dictionary containing the fields - found, found_id if similar feedback was found, otherwise found field is False and found_id is None")
+    output_schema: tuple[dict, str] = ("dict", "Returns $semantic_search_result which is a dictionary containing the fields - found, found_id if similar feedback was found, otherwise found field is False and found_id is None")
 
     def run(self, _: ToolRunContext, title: str, description: str) -> bool:
         """Run the SemanticSearchForFeedback."""
@@ -133,7 +138,7 @@ class SemanticSearchForFeedback(Tool[str]):
 
         top = results[0] if results else None
 
-        print('top',top.get('_id',None))
+        print('top',results[0].get('score',None) if results else None)
 
         if top and float(top.get("score", 0.0)) >= SIMILARITY_THRESHOLD:
             return {
@@ -146,10 +151,28 @@ class SemanticSearchForFeedback(Tool[str]):
                 "found_id": None
             }
 
+class UpvoteFeedback(Tool[str]):
+    """Upvotes a feedback document in the mongodb database"""
+    id: str = "upvote_feedback"
+    name: str = "Upvote feedback"
+    description: str = "Upvotes a feedback document in the mongodb database"
+    args_schema: type[BaseModel] = UpvoteFeedbackSchema
+    output_schema: tuple[str, str] = ("str", "A string of the upvote status")
 
-
-
-
+    def run(self, _: ToolRunContext, feedback_id: str) -> str:
+        """Run the UpvoteFeedback."""
+        try:
+            object_id = ObjectId(feedback_id)
+            
+            result = coll.update_one({"_id": object_id}, {"$inc": {"upvotes": 1}})
+            
+            if result.matched_count == 0:
+                return "Error: Feedback ID not found"
+            
+            return "Feedback upvoted successfully"
+            
+        except Exception as e:
+            return f"Error upvoting feedback: {str(e)}"
 
 
 

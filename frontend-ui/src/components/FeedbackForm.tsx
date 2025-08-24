@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { FeedbackData } from '../types';
+import api from '../services/api';
+import { toast } from 'react-toastify';
 
 interface FeedbackFormProps {
-  onSubmit: (feedback: Omit<FeedbackData, 'id' | 'submittedAt' | 'status' | 'aiAnalysis'>) => void;
+  onSubmit: (feedback: FeedbackData) => void;
 }
 
 const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    category: 'bug' as const,
-    severity: 'medium' as const,
-    contactInfo: {
-      name: '',
-      email: ''
-    }
+    customer_email: '',
+    customer_name: '',
+    feedback_title: '',
+    feedback_description: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -24,15 +22,23 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSubmit }) => {
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
     
-    if (!formData.title.trim()) {
-      newErrors.title = 'Title is required';
+    if (!formData.feedback_title.trim()) {
+      newErrors.feedback_title = 'Title is required';
     }
-    if (!formData.description.trim()) {
-      newErrors.description = 'Description is required';
+    if (!formData.feedback_description.trim()) {
+      newErrors.feedback_description = 'Description is required';
     }
-    if (formData.contactInfo.email && !/\S+@\S+\.\S+/.test(formData.contactInfo.email)) {
-      newErrors.email = 'Invalid email format';
+    if (!formData.customer_name.trim()) {
+      newErrors.customer_name = 'Name is required';
     }
+    if (!formData.customer_email.trim()) {
+      newErrors.customer_email = 'Email is required';
+    }
+
+    if (formData.customer_email && !/\S+@\S+\.\S+/.test(formData.customer_email)) {
+      newErrors.customer_email = 'Invalid email format';
+    }
+
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -44,31 +50,38 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSubmit }) => {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    onSubmit(formData);
-    setIsSubmitting(false);
-    setIsSubmitted(true);
 
-    // Reset form after delay
-    setTimeout(() => {
-      setIsSubmitted(false);
+    try {
+      await api.submitFeedback(formData);
+      // show toast message "Feedback submitted successfully"
+      toast.success('Feedback submitted successfully');
+    } catch (error) {
+      console.error('Error submitting feedback:', error);
+      toast.error('Error submitting feedback');
+    } finally {
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+    }
+    
+  
       setFormData({
-        title: '',
-        description: '',
-        category: 'bug',
-        severity: 'medium',
-        contactInfo: { name: '', email: '' }
+        feedback_title: '',
+        feedback_description: '',
+        customer_name: '',
+        customer_email: '',
       });
-    }, 3000);
+
+  
   };
 
   if (isSubmitted) {
     return (
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-xl shadow-lg p-8 text-center">
+        {/* Show back button */}
+        <div className="flex justify-end">
+        <button className="bg-blue-500 text-white px-4 py-2 rounded-md" onClick={() => setIsSubmitted(false)}>Back</button>
+        </div>
           <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Feedback Submitted!</h2>
           <p className="text-gray-600 mb-4">
@@ -98,6 +111,21 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSubmit }) => {
         </div>
       </div>
 
+      {/* Bug Report Requirements */}
+      <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
+        <h3 className="font-medium text-amber-800 mb-2">For Bug Reports, Please Include:</h3>
+        <ul className="space-y-2 text-sm text-amber-700">
+          <li className="flex items-center">
+            <span className="w-5 h-5 inline-flex items-center justify-center bg-amber-200 rounded-full mr-2 text-amber-800">1</span>
+            Device type (web, mobile, desktop, etc.)
+          </li>
+          <li className="flex items-center">
+            <span className="w-5 h-5 inline-flex items-center justify-center bg-amber-200 rounded-full mr-2 text-amber-800">2</span>
+            Browser (e.g. Chrome, Firefox, Safari, etc.)
+          </li>
+         
+        </ul>
+      </div>
       <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg p-8 space-y-6">
         {/* Title */}
         <div>
@@ -107,17 +135,17 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSubmit }) => {
           <input
             type="text"
             id="title"
-            value={formData.title}
-            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+            value={formData.feedback_title}
+            onChange={(e) => setFormData({ ...formData, feedback_title: e.target.value })}
             className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
-              errors.title ? 'border-red-500' : 'border-gray-300'
+              errors.feedback_title ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="Brief description of your feedback"
           />
-          {errors.title && (
+          {errors.feedback_title && (
             <p className="mt-1 text-sm text-red-600 flex items-center">
               <AlertCircle className="w-4 h-4 mr-1" />
-              {errors.title}
+              {errors.feedback_title}
             </p>
           )}
         </div>
@@ -131,64 +159,72 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSubmit }) => {
           </label>
           <textarea
             id="description"
-            value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+            value={formData.feedback_description}
+            onChange={(e) => setFormData({ ...formData, feedback_description: e.target.value })}
             rows={5}
             className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
-              errors.description ? 'border-red-500' : 'border-gray-300'
+              errors.feedback_description ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="Please provide detailed information about your feedback..."
           />
-          {errors.description && (
+          {errors.feedback_description && (
             <p className="mt-1 text-sm text-red-600 flex items-center">
               <AlertCircle className="w-4 h-4 mr-1" />
-              {errors.description}
+              {errors.feedback_description}
             </p>
           )}
         </div>
 
         {/* Contact Info */}
         <div className="bg-gray-50 rounded-lg p-6 space-y-4">
-          <h3 className="text-lg font-medium text-gray-900">Contact Information (Optional)</h3>
+          <h3 className="text-lg font-medium text-gray-900">Contact Information</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                Name
+                Name*
               </label>
               <input
                 type="text"
                 id="name"
-                value={formData.contactInfo.name}
+                value={formData.customer_name}
                 onChange={(e) => setFormData({
                   ...formData,
-                  contactInfo: { ...formData.contactInfo, name: e.target.value }
+                  customer_name: e.target.value
                 })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                  errors.customer_name ? 'border-red-500' : 'border-gray-300'
+                }`}
                 placeholder="Your name"
               />
+                {errors.customer_name && (
+                <p className="mt-1 text-sm text-red-600 flex items-center">
+                  <AlertCircle className="w-4 h-4 mr-1" />
+                  {errors.customer_name}
+                </p>
+              )}
             </div>
             
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email
+                Email*
               </label>
               <input
                 type="email"
                 id="email"
-                value={formData.contactInfo.email}
+                value={formData.customer_email}
                 onChange={(e) => setFormData({
                   ...formData,
-                  contactInfo: { ...formData.contactInfo, email: e.target.value }
+                  customer_email: e.target.value
                 })}
                 className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
+                  errors.customer_email ? 'border-red-500' : 'border-gray-300'
                 }`}
                 placeholder="your.email@example.com"
               />
-              {errors.email && (
+              {errors.customer_email && (
                 <p className="mt-1 text-sm text-red-600 flex items-center">
                   <AlertCircle className="w-4 h-4 mr-1" />
-                  {errors.email}
+                  {errors.customer_email}
                 </p>
               )}
             </div>
@@ -198,6 +234,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSubmit }) => {
         {/* Submit Button */}
         <button
           type="submit"
+          onClick={handleSubmit}
           disabled={isSubmitting}
           className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-6 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2"
         >

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import FeedbackForm from './components/FeedbackForm';
-import JudgeReview from './components/JudgeReview';
+import JudgeReview from './components/Feedbacks';
 import { FeedbackData } from './types';
 import { mockFeedbacks } from './data/mockData';
 
@@ -66,7 +66,7 @@ function App() {
                     : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                 }`}
               >
-                Judge Review ({feedbacks.length})
+                Feedbacks ({feedbacks.length})
               </button>
             </nav>
           </div>
