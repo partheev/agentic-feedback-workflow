@@ -39,15 +39,3 @@ class FeedbackPayload(BaseModel):
 class FeedbackSubmitResponse(BaseModel):
     message: str
 
-
-# ----- Portia structured output schema -----
-
-class PortiaTriageOutput(BaseModel):
-    category: Literal["bug", "feature", "other"] = Field(
-        description="Top-level classification"
-    )
-    severity: Literal["low", "medium", "high", "critical"] = Field(
-        description="Impact/urgency estimate"
-    )
-    summary: str = Field(description="One-sentence description of the issue")
-    tags: List[str] = Field(default_factory=list, description="Useful labels")

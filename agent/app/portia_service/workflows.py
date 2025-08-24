@@ -10,11 +10,7 @@ GITHUB_OWNER = os.getenv("GITHUB_OWNER", "your-org")
 GITHUB_REPO = os.getenv("GITHUB_REPO", "your-repo")
 SENDER_EMAIL_ADDRESS = os.getenv("SENDER_EMAIL_ADDRESS", "support@example.com")
 RECEIVER_EMAIL_ADDRESS = os.getenv("RECEIVER_EMAIL_ADDRESS", "partheev@gmail.com")
-DEVELOPERS = {
-    "BACKEND":"partheev",
-    "FRONTEND":"poornesh-chenna",
-    "DEVOPS":"partheev",
-}
+
 
 def handle_customer_feedback(feedback_report: FeedbackIn):
 
@@ -90,7 +86,7 @@ def handle_customer_feedback(feedback_report: FeedbackIn):
         plan_inputs=[
             PlanInput(
                 name="$customer_email",
-                # value=feedback_report.customer_email # TODO: This is for testing purpose, remove this after upgrading Resend plan to premium. Right now it can only send to verified emails.
+                # value=feedback_report.customer_email # TODO: This is for testing purpose, remove RECEIVER_EMAIL_ADDRESS and use user email after upgrading Resend plan to premium. Right now it can only send to verified emails.
                 value=RECEIVER_EMAIL_ADDRESS
             ),PlanInput(
                 name="$customer_name",

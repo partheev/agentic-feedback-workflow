@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 from portia import (
     Config, Portia, DefaultToolRegistry, LLMProvider, McpToolRegistry, ToolRegistry
 )
-from portia.cli import CLIExecutionHooks
 import os
 from .custom_tools.semantic_search import InsertFeedback, SemanticSearchForFeedback, UpvoteFeedback
 
@@ -34,6 +33,8 @@ tool_registry = tool_registry + my_tool_registry
 
 
 # MongoDB MCP (npx), pass connection string
+# Note: As official mongo mcp server is not working, we used an open source mongo mcp server (unoffical one).
+# Ref: https://github.com/kiliczsh/mcp-mongo-server
 tool_registry = tool_registry + McpToolRegistry.from_stdio_connection(
     server_name="mongodb",
     command="npx",

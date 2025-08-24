@@ -16,11 +16,11 @@ load_dotenv()
 MONGODB_URI = os.getenv("MONGODB_URI")
 DB_NAME = os.getenv("MONGODB_NAME")
 COLL_NAME = os.getenv("MONGODB_COLL")
+OPENAI_EMBEDDING_MODEL = os.getenv("OPENAI_EMBEDDING_MODEL")
 
 openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
-OPENAI_EMBEDDING_MODEL = os.getenv("OPENAI_EMBEDDING_MODEL")
 
 SIMILARITY_THRESHOLD=0.80
 
