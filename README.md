@@ -45,7 +45,6 @@ This reduces human effort, surfaces emerging issues quickly, and ensures consist
 
 ---
 
-
 ## Features
 
 - **Adaptive Quality Check**: Ensures bug submissions include all essential information.
