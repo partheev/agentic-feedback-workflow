@@ -6,9 +6,10 @@ from pydantic import BaseModel, Field
 from portia.tool import Tool, ToolRunContext
 from openai import OpenAI
 from dotenv import load_dotenv
-from bson.objectid import ObjectId
 
 from pymongo import MongoClient
+from bson.objectid import ObjectId
+
 
 load_dotenv()
 

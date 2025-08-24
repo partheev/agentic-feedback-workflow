@@ -241,21 +241,6 @@ files = [
 ]
 
 [[package]]
-name = "bson"
-version = "0.5.10"
-description = "BSON codec for Python"
-optional = false
-python-versions = "*"
-groups = ["main"]
-files = [
-    {file = "bson-0.5.10.tar.gz", hash = "sha256:d6511b2ab051139a9123c184de1a04227262173ad593429d21e443d6462d6590"},
-]
-
-[package.dependencies]
-python-dateutil = ">=2.4.0"
-six = ">=1.9.0"
-
-[[package]]
 name = "certifi"
 version = "2025.8.3"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -3947,4 +3932,4 @@ cffi = ["cffi (>=1.11)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12"
-content-hash = "27928bc264b878c85b2337bd7b8fd1cd0bdd9d0d999f41842ec109b6b72f3eac"
+content-hash = "89c3601fbe812fc78c49dcc986375d6ac8ac868cff5bcba2560cde5d154c695b"
