@@ -60,11 +60,12 @@ This reduces human effort, surfaces emerging issues quickly, and ensures consist
 | Component         | Technology / Tool                                      |
 |------------------|--------------------------------------------------------|
 | AI Orchestration | [Portia SDK](https://docs.portialabs.ai/)             |
-| Embeddings       | OpenAI                    |
+| Embeddings       | OpenAI text-embedding-3-small                         |
+| LLM Model        | OpenAI gpt-4.1-mini                                    |
 | Vector DB        | MongoDB Atlas with Vector Search Index                 |
 | MCP Tools        | GitHub MCP, MongoDB MCP, Resend mail, Tavily MCP       |
 | Issue Tracking   | GitHub Issues                                          |
-| Language         | Python 3.12                                            |
+| Language & Framework| Python 3.12, Typescript, React and FastAPI          |
 | Hosting          |  Netlify (Frontend) and Render (Backend)
 
 
