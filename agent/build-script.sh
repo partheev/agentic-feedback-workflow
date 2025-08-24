@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install poetry using pip 
-pip install -r --requirements.txt
+pip install -r requirements.txt
 
 # Install fastapi
 pip install "fastapi[standard]"
