@@ -107,6 +107,7 @@ cd agentic-feedback-workflow
 
 # Run Backend
 # Run build script which install dependencies & build mcp servers
+cd agent
 sh ./build-script.sh
 
 # Configure environment variables:
