@@ -6,12 +6,12 @@
 
 ##  Table of Contents
 
-1. [Problem & Solution](#problem--solution)  
-2. [Features](#features)  
-3. [Tech Stack](#tech-stack)  
-4. [Screenshots](#demo--screenshots)  
-5. [Architecture & Workflow](#architecture--workflow)  
-6. [Setup & Run](#setup--run)  
+1. [Problem & Solution](#problem--solution)
+2. [AI Agentic Workflow](#ai-agentic-workflow)  
+3. [Features](#features)  
+4. [Tech Stack](#tech-stack)  
+5. [Screenshots](#demo--screenshots)  
+6. [Run Project](#setup--run)  
 
 ---
 
@@ -91,6 +91,7 @@ This reduces human effort, surfaces emerging issues quickly, and ensures consist
 <img width="1075" height="196" alt="Screenshot 2025-08-24 at 3 47 38 PM" src="https://github.com/user-attachments/assets/70dcf0aa-cb15-4c8e-a45a-8b7e24474624" />
 
 
+# Run Project
 ## Setup & Run Backend/Agent
 
 ```bash
