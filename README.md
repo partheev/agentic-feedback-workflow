@@ -9,12 +9,9 @@
 1. [Problem & Solution](#problem--solution)  
 2. [Features](#features)  
 3. [Tech Stack](#tech-stack)  
-4. [Architecture & Workflow](#architecture--workflow)  
-5. [Setup & Run](#setup--run)  
-6. [Demo & Screenshots](#demo--screenshots)  
-7. [Contribution & Future Work](#contribution--future-work)  
-8. [Team & Roles](#team--roles)  
-9. [License](#license)  
+4. [Screenshots](#demo--screenshots)  
+5. [Architecture & Workflow](#architecture--workflow)  
+6. [Setup & Run](#setup--run)  
 
 ---
 
@@ -67,11 +64,19 @@ This reduces human effort, surfaces emerging issues quickly, and ensures consist
 | Hosting          |  Netlify (Frontend) and Render (Backend)
 
 
-**Note:** Implemented custom tools for semantic search and creating mongo docs with vector embeddings.
+#### **Note:** Implemented custom tools for semantic search and creating mongo docs with vector embeddings.
 ---
 
+# Screenshots
+<img width="1154" height="859" alt="Screenshot 2025-08-24 at 10 06 58 AM" src="https://github.com/user-attachments/assets/fe1e395f-3785-43e9-93be-a25a284fcf8c" />
+<img width="1158" height="616" alt="Screenshot 2025-08-24 at 10 04 27 AM" src="https://github.com/user-attachments/assets/003436a3-6046-4143-9c53-0c28416b7ba4" />
+<img width="1509" height="857" alt="Screenshot 2025-08-24 at 10 07 52 AM" src="https://github.com/user-attachments/assets/97d16b27-d32b-42df-a4a9-5daaaf9c94b3" />
+<img width="1512" height="909" alt="Screenshot 2025-08-24 at 10 08 31 AM" src="https://github.com/user-attachments/assets/ab449e08-8a44-40c2-9946-1c2bca31278b" />
 
-## Setup & Run
+<img width="1079" height="594" alt="Screenshot 2025-08-24 at 10 08 51 AM" src="https://github.com/user-attachments/assets/6e532533-857b-4835-bd8b-7153f00e9b8c" />
+
+
+## Setup & Run Backend/Agent
 
 ```bash
 # Clone project
@@ -86,7 +91,7 @@ sh ./build-script.sh
 # - OPENAI_API_KEY
 # - OPENAI_MODEL
 # - OPENAI_EMBEDDING_MODEL
-# - MONGODB_NAM
+# - MONGODB_NAME
 # - MONGODB_COLL
 # - PORTIA_API_KEY
 # - MONGODB_URI
@@ -101,3 +106,19 @@ fastapi dev app/main.py
 
 # Run FastAPI for production
 fastapi run app/main.py
+```
+
+## Run Frontend
+
+```bash
+# Go to frontend directory
+cd frontend-ui
+
+# Install deps
+npm run install
+
+# Run the project
+npm run dev
+
+# Configure the env
+# - VITE_API_URL
