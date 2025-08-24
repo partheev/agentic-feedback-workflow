@@ -3,6 +3,7 @@ import FeedbackForm from './components/FeedbackForm';
 import JudgeReview from './components/Feedbacks';
 import { FeedbackData } from './types';
 import { mockFeedbacks } from './data/mockData';
+import Feedbacks from './components/Feedbacks';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<'form' | 'review'>('form');
@@ -78,9 +79,7 @@ function App() {
         {currentPage === 'form' ? (
           <FeedbackForm onSubmit={addFeedback} />
         ) : (
-          <JudgeReview 
-            feedbacks={feedbacks} 
-            onStatusUpdate={updateFeedbackStatus}
+          <Feedbacks
           />
         )}
       </main>
