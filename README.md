@@ -77,6 +77,8 @@ This reduces human effort, surfaces emerging issues quickly, and ensures consist
 <img width="1154" height="859" alt="Screenshot 2025-08-24 at 10 06 58 AM" src="https://github.com/user-attachments/assets/fe1e395f-3785-43e9-93be-a25a284fcf8c" />
 <img width="1158" height="616" alt="Screenshot 2025-08-24 at 10 04 27 AM" src="https://github.com/user-attachments/assets/003436a3-6046-4143-9c53-0c28416b7ba4" />
 <img width="1509" height="857" alt="Screenshot 2025-08-24 at 10 07 52 AM" src="https://github.com/user-attachments/assets/97d16b27-d32b-42df-a4a9-5daaaf9c94b3" />
+
+### Check github issues here - https://github.com/partheev/agentic-feedback-workflow/issues
 <img width="1512" height="909" alt="Screenshot 2025-08-24 at 10 08 31 AM" src="https://github.com/user-attachments/assets/ab449e08-8a44-40c2-9946-1c2bca31278b" />
 
 <img width="1079" height="594" alt="Screenshot 2025-08-24 at 10 08 51 AM" src="https://github.com/user-attachments/assets/6e532533-857b-4835-bd8b-7153f00e9b8c" />
